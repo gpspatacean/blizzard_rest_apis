@@ -1,0 +1,119 @@
+openapi: 3.0.0
+info:
+  title: "Blizzard WoW public API wrapper"
+  description: "Auto-generated SDK API wrapper on top of Blizzard public APIs"
+  contact:
+    name: "George Spatacean"
+    email: "george.spatacean@gmail.com"
+  version: 0.0.1
+servers:
+  - url: "https://eu.api.blizzard.com"
+  - url: "https://us.api.blizzard.com"
+tags:
+  - name: "AuctionHouse"
+    description: "REST Client SDK to consume Blizzard`s Auction House endpoint(s)"
+paths:
+  /data/wow/connected-realm/{connectedRealmId}/auctions:
+    get:
+      tags:
+        - "auctionHouse"
+      operationId: "getAuctionsByConnectedRealmId"
+      parameters:
+        - in: "path"
+          name: "connectedRealmId"
+          required: true
+          schema:
+            type: "integer"
+            minimum: 1
+          description: "Connected Realm as per Blizzard API"
+        - in: "query"
+          name: "namespace"
+          required: true
+          schema:
+            type: "string"
+            minimum: 1
+            maximum: 1
+          description: "Blizzard API namespace grouping"
+        - in: "query"
+          name: "locale"
+          schema:
+            type: "string"
+            minimum: 1
+            maximum: 1
+          description: "Locale used in response."
+      responses:
+        200:
+          description: "List of the auctions on the specified realm"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/auctionsApiResponse"
+      security:
+        - blizzard_auth: []
+components:
+  schemas:
+    self:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+    _links:
+      properties:
+        self:
+          $ref: "#/components/schemas/self"
+    connected_realm:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+    item:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+    auction:
+      type: "object"
+      properties:
+        id:
+          type: "integer"
+          format: "int64"
+        item:
+          $ref: "#/components/schemas/item"
+        quantity:
+          type: "integer"
+          format: "int32"
+        unit_price:
+          type: "integer"
+          format: "int64"
+        time_left:
+          type: "string"
+          enum:
+            - "SHORT"
+            - "MEDIUM"
+            - "LONG"
+            - "VERY_LONG"
+    auctions:
+      type: "array"
+      items:
+        $ref: "#/components/schemas/auction"
+    auctionsApiResponse:
+      type: "object"
+      properties:
+        _links:
+          $ref: "#/components/schemas/_links"
+        connected_realms:
+          $ref: "#/components/schemas/connected_realm"
+        auctions:
+          $ref: "#/components/schemas/auctions"
+  securitySchemes:
+    blizzard_auth:
+      type: "oauth2"
+      flows:
+        clientCredentials:
+          tokenUrl: "https://us.battle.net/oauth/token"
+          scopes: {}
+    access_token:
+      type: "apiKey"
+      in: "query"
+      name: "access_token"

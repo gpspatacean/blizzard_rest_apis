@@ -1,0 +1,10 @@
+blizz-api-config:
+  baseUrl: https://us.battle.net
+  oauth2:
+    client:
+      grant_type: client_credentials
+      clientId: ${BLIZZARD_API_CLIENT_ID} # Obtained when registering a new
+      # application on Blizzard API Portal
+      clientSecret: ${BLIZZARD_API_CLIENT_SECRET} # Obtained when registering a new
+      # application on Blizzard API Portal
+      accessTokenUri: ${blizz-api-config.baseUrl}/oauth/token

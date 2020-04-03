@@ -1,0 +1,185 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <parent>
+        <groupId>com.gspatace</groupId>
+        <artifactId>blizzard-restsdk-client</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>blizzard-auction-house-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <swagger-annotations-version>1.5.8</swagger-annotations-version>
+        <jersey-version>2.27</jersey-version>
+        <jackson-version>2.9.10</jackson-version>
+        <jackson-databind-nullable-version>0.2.0</jackson-databind-nullable-version>
+        <jodatime-version>2.7</jodatime-version>
+        <maven-plugin-version>1.0.0</maven-plugin-version>
+        <junit-version>4.8.1</junit-version>
+        <spring-core-version>5.2.5.RELEASE</spring-core-version>
+        <spring-context-version>5.2.5.RELEASE</spring-context-version>
+        <spring-web-version>5.2.5.RELEASE</spring-web-version>
+        <jsr305-version>3.0.2</jsr305-version>
+    </properties>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>4.2.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>${project.parent.groupId}</groupId>
+                        <artifactId>blizzard-openapi-specs</artifactId>
+                        <version>${project.parent.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>auction_house_openapi_spec.yaml</inputSpec>
+                            <groupId>com.gspatace.blizzard.api</groupId>
+                            <artifactId>auction-house</artifactId>
+                            <artifactVersion>0.0.1</artifactVersion>
+                            <generatorName>java</generatorName>
+                            <library>resttemplate</library>
+                            <configOptions>
+                                <dateLibrary>java8</dateLibrary>
+                            </configOptions>
+                            <invokerPackage>com.gspatace.blizzard.auctionhouse</invokerPackage>
+                            <apiPackage>com.gspatace.blizzard.auctionhouse.api</apiPackage>
+                            <modelPackage>com.gspatace.blizzard.auctionhouse.model</modelPackage>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring-core-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring-context-version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-web -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring-web-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.joschi.jackson</groupId>
+            <artifactId>jackson-datatype-threetenbp</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+
+        <!-- dependencies are needed for the client being generated -->
+
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations-version}</version>
+        </dependency>
+
+        <!-- You can find the dependencies for the library configuation you chose by looking in JavaClientCodegen.
+             Then find the corresponding dependency on Maven Central, and set the versions in the property section below -->
+
+        <!-- HTTP client: jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>${jersey-version}</version>
+        </dependency>
+
+        <!-- @Nullable annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>${jsr305-version}</version>
+        </dependency>
+
+        <!-- JSON processing: jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-base</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>${jackson-databind-nullable-version}</version>
+        </dependency>
+
+        <!-- Joda time: if you use it -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime-version}</version>
+        </dependency>
+
+        <!-- Base64 encoding that works in both JVM and Android -->
+        <dependency>
+            <groupId>com.brsanthu</groupId>
+            <artifactId>migbase64</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <!-- test dependencies -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit-version}</version>
+        </dependency>
+    </dependencies>
+</project>
