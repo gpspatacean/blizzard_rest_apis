@@ -1,7 +1,9 @@
 package com.gspatace.blizzard.driver.app;
+
 import com.gspatace.blizzard.auctionhouse.ApiClient;
 import com.gspatace.blizzard.auctionhouse.api.AuctionHouseApi;
 import com.gspatace.blizzard.auctionhouse.model.AuctionsApiResponse;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -41,8 +43,11 @@ public class App implements CommandLineRunner {
         try {
             final AuctionsApiResponse auctionsApiResponse =
                     api.getAuctionsByConnectedRealmId(1138, "dynamic-us", "en_US");
-            int noOfAuctions = auctionsApiResponse.getAuctions().size();
+            final int noOfAuctions = auctionsApiResponse.getAuctions().size();
             System.out.println(noOfAuctions);
+            final ObjectMapper objectMapper = new ObjectMapper();
+            final String responseAsJson = objectMapper.writeValueAsString(auctionsApiResponse);
+            System.out.println(responseAsJson);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
