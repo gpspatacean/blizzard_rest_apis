@@ -8,7 +8,6 @@
     <url>https://maven.apache.org</url>
 
     <modules>
-        <module>openapi-specs</module>
         <module>client-apis</module>
         <module>driver-app</module>
     </modules>
