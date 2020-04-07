@@ -16,23 +16,13 @@
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
                 <version>4.2.3</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>${project.parent.groupId}</groupId>
-                        <artifactId>blizzard-openapi-specs</artifactId>
-                        <version>${project.parent.version}</version>
-                    </dependency>
-                </dependencies>
                 <executions>
                     <execution>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>auction_house_openapi_spec.yaml</inputSpec>
-                            <groupId>com.gspatace.blizzard.api</groupId>
-                            <artifactId>auction-house</artifactId>
-                            <artifactVersion>0.0.1</artifactVersion>
+                            <inputSpec>${project.basedir}/src/main/resources/auction_house_openapi_spec.yaml</inputSpec>
                             <generatorName>java</generatorName>
                             <library>resttemplate</library>
                             <configOptions>
