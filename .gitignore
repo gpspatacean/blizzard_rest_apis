@@ -2,3 +2,8 @@
 *.iml
 */target/
 client-apis/*/target/
+
+.classpath
+.project
+.settings/
+ignoreme
