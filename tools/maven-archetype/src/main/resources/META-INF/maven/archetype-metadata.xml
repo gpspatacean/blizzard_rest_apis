@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" name="blizzard-rest-client-generator"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <requiredProperties>
+    <requiredProperty key="inputSpecFile"/>
+    <requiredProperty key="mainApiName" />
+    <requiredProperty key="generatedApiPackage">
+      <defaultValue>com.gspatace.blizzard.${mainApiName}.api</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="generatedModelPackage">
+      <defaultValue>com.gspatace.blizzard.${mainApiName}.model</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  <fileSets>
+    <fileSet>
+      <directory>src/main/resources</directory>
+      <includes>
+        <include>__inputSpecFile__</include>
+      </includes>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>
