@@ -44,6 +44,36 @@ After this, there are 2 ways to run the sample from [driver-app](driver-app) .
  2. set *BLIZZARD_API_CLIENT_ID*, *BLIZZARD_API_CLIENT_SECRET* as environment variables. Then
  just run `java -jar blizzard-sdk-driver-app-1.0-SNAPSHOT.jar`
 
+## Contributing
+Adding new modules is straight-forward. You can use the provided Maven Archetype (`com.gspatace:blizzard-rest-client-generator`) in order to generate new modules.
+In `<root>/client-apis`, run `mvn archetype:generate -DarchetypeGroupId=com.gspatace -DarchetypeArtifactId=blizzard-rest-client-generator`
+. Sample:
+```
+[INFO] Archetype repository not defined. Using the one from [com.gspatace:blizzard-rest-client-generator:1.0-SNAPSHOT] found in catalog local
+ Define value for property 'groupId': com.gspatace
+ Define value for property 'artifactId': blizzard-wow-character-client
+ Define value for property 'version' 1.0-SNAPSHOT: :
+ Define value for property 'package' com.gspatace: :
+ Define value for property 'inputSpecFile': wow_character_openapi_spec.yaml
+ Define value for property 'mainApiName': wow.character
+ Define value for property 'generatedApiPackage' com.gspatace.blizzard.wow.character.api: :
+ Define value for property 'generatedModelPackage' com.gspatace.blizzard.wow.character.model: :
+ Confirm properties configuration:
+ groupId: com.gspatace
+ artifactId: blizzard-wow-character-client
+ version: 1.0-SNAPSHOT
+ package: com.gspatace
+ inputSpecFile: wow_character_openapi_spec.yaml
+ mainApiName: wow.character
+ generatedApiPackage: com.gspatace.blizzard.wow.character.api
+ generatedModelPackage: com.gspatace.blizzard.wow.character.model
+  Y: :
+ ...
+[INFO] Project created from Archetype in dir: <root>\client-apis\blizzard-wow-character-client
+``` 
+This creates the `<artifactId>` module, and adds it to the main parent. The OpenAPI description of the target REST
+API has to be placed in `<root>\client-apis\<artifactId>\src\main\resources\<provided-input-spec-file>`. `mvn clean install` will now generate the artifact.
+
 ## Available APIs
 As per Blizzard`s categories, found on their official [website](https://develop.battle.net/documentation/world-of-warcraft/game-data-apis), currently the following APIs are available:
 1. Auction House API
