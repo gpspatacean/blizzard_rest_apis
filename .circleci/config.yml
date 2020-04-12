@@ -7,3 +7,4 @@ jobs:
         steps:
             - checkout
             - run: mvn install
+            - run: java -jar driver-app/target/blizzard-sdk-driver-app-1.0-SNAPSHOT.jar
