@@ -1,0 +1,10 @@
+version: 2
+jobs:
+    build:
+        working_directory: ~/runs
+        docker:
+            - image: circleci/openjdk:8-jdk-stretch
+        steps:
+            - run: echo "Hello, World!"
+            - checkout
+            - run: mvn install
