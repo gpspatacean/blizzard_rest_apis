@@ -155,6 +155,7 @@
 
     <modules>
         <module>auction-house-client</module>
-    </modules>
+    <module>blizzard-wow-creature-api</module>
+  </modules>
 
 </project>
