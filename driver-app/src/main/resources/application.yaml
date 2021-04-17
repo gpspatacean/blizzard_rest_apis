@@ -1,5 +1,5 @@
 blizz-api-config:
-  baseUrl: https://us.battle.net
+  baseUrl: https://eu.battle.net
   oauth2:
     client:
       grant_type: client_credentials

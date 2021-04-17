@@ -1,0 +1,128 @@
+openapi: 3.0.0
+info:
+  title: "Blizzard WoW public API wrapper"
+  description: "Auto-generated SDK API wrapper on top of Blizzard public APIs"
+  contact:
+    name: "George Spatacean"
+    email: "george.spatacean@gmail.com"
+  version: 0.0.1
+servers:
+  - url: "https://eu.api.blizzard.com"
+  - url: "https://us.api.blizzard.com"
+tags:
+  - name: "Creature API"
+    description: "REST Client SDK to consume Blizzard`s Creature API endpoint(s)"
+paths:
+  /data/wow/creature/{creatureId}:
+    get:
+      tags:
+        - "creature"
+      operationId: "getCreatureById"
+      parameters:
+        - in: "path"
+          name: "creatureId"
+          required: true
+          schema:
+            type: "integer"
+            minimum: 1
+          description: "The ID of the creature"
+        - in: "query"
+          name: "namespace"
+          required: true
+          schema:
+            type: "string"
+            minimum: 1
+            maximum: 1
+          description: "Blizzard API namespace grouping"
+        - in: "query"
+          name: "locale"
+          schema:
+            type: "string"
+            minimum: 1
+            maximum: 1
+          description: "Locale used in response."
+      responses:
+        200:
+          description: "List of the auctions on the specified realm"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/creatureApiResponse"
+      security:
+        - blizzard_auth: []
+        - access_token: []
+components:
+  schemas:
+    creatureApiResponse:
+      type: "object"
+      properties:
+        _links:
+          $ref: "#/components/schemas/_links"
+        id:
+          type: "integer"
+          format: "int64"
+        name:
+          type: "string"
+        type:
+          $ref: "#/components/schemas/type"
+        family:
+          $ref: "#/components/schemas/family"
+        creature_displays:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/creature_display"
+        is_tameable:
+          type: boolean
+    self:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+    _links:
+      properties:
+        self:
+          $ref: "#/components/schemas/self"
+    type:
+      type: "object"
+      properties:
+        key:
+          $ref: "#/components/schemas/key"
+        name:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int64"
+    family:
+      type: object
+      properties:
+        key:
+          $ref: "#/components/schemas/key"
+        name:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int64"
+    creature_display:
+      type: object
+      properties:
+        key:
+          $ref: "#/components/schemas/key"
+        id:
+          type: "integer"
+          format: "int64"
+    key:
+      type: "object"
+      properties:
+        href:
+          type: "string"
+  securitySchemes:
+    blizzard_auth:
+      type: "oauth2"
+      flows:
+        clientCredentials:
+          tokenUrl: "https://eu.battle.net/oauth/token"
+          scopes: {}
+    access_token:
+      type: "apiKey"
+      in: "query"
+      name: "access_token"
