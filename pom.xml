@@ -12,6 +12,7 @@
         <module>client-apis</module>
         <module>driver-app</module>
         <module>tools/maven-archetype</module>
+        <module>tools/swagger-ui-integration</module>
     </modules>
 
     <properties>
