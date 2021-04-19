@@ -12,6 +12,7 @@
         <module>client-apis</module>
         <module>driver-app</module>
         <module>tools/maven-archetype</module>
+        <module>clients-apis-all</module>
     </modules>
 
     <properties>
