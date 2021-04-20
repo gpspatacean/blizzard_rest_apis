@@ -1,6 +1,5 @@
 package com.gspatace.blizzard.swagger.integration.services;
 
-
 import com.gspatace.blizzard.swagger.integration.intf.DiscoverableResource;
 import com.gspatace.blizzard.swagger.integration.intf.SwaggerResource;
 import com.gspatace.blizzard.swagger.integration.model.ResourceData;
