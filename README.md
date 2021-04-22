@@ -82,9 +82,9 @@ In `<root>/client-apis`, run `mvn archetype:generate -DarchetypeGroupId=com.gspa
 This creates the `<artifactId>` module, and adds it to the main parent. The OpenAPI description of the target REST
 API has to be placed in `<root>\client-apis\<artifactId>\src\main\resources\<provided-input-spec-file>`. `mvn clean install` will now generate the artifact.
 
-For Swagger-UI integration, a new endpoint controller should be added in [tools\swagger-ui-integration](tools\swagger-ui-integration), 
+For Swagger-UI integration, a new endpoint controller should be added in [tools/swagger-ui-integration](tools/swagger-ui-integration), 
 in `com.gspatace.blizzard.swagger.integration.apis` package. 
-See [Auction House API](tools\swagger-ui-integration\src\main\java\com\gspatace\blizzard\swagger\integration\apis\AuctionHouseApi.java)
+See [Auction House API](tools/swagger-ui-integration/src/main/java/com/gspatace/blizzard/swagger/integration/apis/AuctionHouseApi.java)
 for reference.
 
 ## Available APIs
