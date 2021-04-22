@@ -7,11 +7,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Empty configuration method override in order to
+     * disable Spring`s Basic Authentication
+     *
+     * @param http Not used.
+     *             It allows configuration of web security for all requests
+     */
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .requiresChannel()
-                .anyRequest()
-                .requiresSecure();
+    protected void configure(HttpSecurity http) {
     }
 }
