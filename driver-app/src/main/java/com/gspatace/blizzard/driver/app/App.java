@@ -3,12 +3,12 @@ package com.gspatace.blizzard.driver.app;
 import com.gspatace.blizzard.auctionhouse.ApiClient;
 import com.gspatace.blizzard.auctionhouse.api.AuctionHouseApi;
 import com.gspatace.blizzard.auctionhouse.model.AuctionsApiResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.token.grant.client.ClientCredentialsResourceDetails;
@@ -17,6 +17,7 @@ import org.springframework.security.oauth2.client.token.grant.client.ClientCrede
  * Created by George on 4/1/2020.
  */
 @SpringBootApplication
+@Slf4j
 public class App implements CommandLineRunner {
 
     public static void main(String[] args) {
@@ -45,20 +46,17 @@ public class App implements CommandLineRunner {
             final AuctionsApiResponse auctionsApiResponse =
                     api.getAuctionsByConnectedRealmId(1138, "dynamic-us", "en_US");
             final int noOfAuctions = auctionsApiResponse.getAuctions().size();
-            System.out.println(noOfAuctions);
+            log.info("Current number of auctions: {}", noOfAuctions);
             final ObjectMapper objectMapper = new ObjectMapper();
             final String responseAsJson = objectMapper.writeValueAsString(auctionsApiResponse);
-            System.out.println(responseAsJson);
+            log.info("Auction House API Response: {}", responseAsJson);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("Exception occurred:", ex);
         }
 
-        String at = oAuthRestTemplate().getAccessToken().getValue();
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-        context.scan("com.gspatace.blizzard");
-        context.refresh();
-        CreatureAPIDriver creatureAPIDriver = context.getBean(CreatureAPIDriver.class);
-        creatureAPIDriver.doTest(at);
+        String accessToken = oAuthRestTemplate().getAccessToken().getValue();
+        CreatureAPIDriver creatureAPIDriver = new CreatureAPIDriver();
+        creatureAPIDriver.doTest(accessToken);
     }
 }
 
