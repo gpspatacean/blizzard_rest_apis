@@ -26,6 +26,7 @@ paths:
             type: "integer"
             minimum: 1
           description: "The ID of the creature"
+          example: 42722
         - in: "query"
           name: "namespace"
           required: true
@@ -34,6 +35,7 @@ paths:
             minimum: 1
             maximum: 1
           description: "Blizzard API namespace grouping"
+          example: "static-eu"
         - in: "query"
           name: "locale"
           schema:
@@ -41,6 +43,7 @@ paths:
             minimum: 1
             maximum: 1
           description: "Locale used in response."
+          example: "en_US"
       responses:
         200:
           description: "List of the auctions on the specified realm"
@@ -72,7 +75,7 @@ components:
           items:
             $ref: "#/components/schemas/creature_display"
         is_tameable:
-          type: boolean
+          type: "boolean"
     self:
       type: "object"
       properties:
@@ -93,7 +96,7 @@ components:
           type: "integer"
           format: "int64"
     family:
-      type: object
+      type: "object"
       properties:
         key:
           $ref: "#/components/schemas/key"
@@ -103,7 +106,7 @@ components:
           type: "integer"
           format: "int64"
     creature_display:
-      type: object
+      type: "object"
       properties:
         key:
           $ref: "#/components/schemas/key"

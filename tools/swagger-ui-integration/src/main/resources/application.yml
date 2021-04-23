@@ -1,0 +1,8 @@
+server:
+  port: 8014
+  ssl:
+    key-store: /path/to/keystore.p12
+    key-store-password: password
+    key-store-type: pkcs12
+    key-alias: blizzapis
+    key-password: password

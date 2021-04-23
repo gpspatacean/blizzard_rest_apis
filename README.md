@@ -44,6 +44,14 @@ After this, there are 2 ways to run the sample from [driver-app](driver-app) .
  2. set *BLIZZARD_API_CLIENT_ID*, *BLIZZARD_API_CLIENT_SECRET* as environment variables. Then
  just run `java -jar blizzard-sdk-driver-app-1.0-SNAPSHOT.jar`
 
+## Swagger-ui Integration
+In [tools/swagger-ui-integration](tools/swagger-ui-integration) there is a [Swagger-UI](https://swagger.io/tools/swagger-ui/) based project that can be used to 
+visually interact with the exposed APIs in a simple/clean manner. It just renders registered Open API Specification files.
+
+Run it with `java -jar tools\swagger-ui-integration\target\blizzard-swagger-ui-integration-1.0-SNAPSHOT.jar --spring.config.location=<path\to\custom\application.yml>` for SSL Settings,
+ or disable SSL with `--server.ssl.enabled=false`
+
+It can also be started with Spring-Boot plugin: `mvn spring-boot:run -Dspring-boot.run.arguments="--spring.config.location=<path/to/custom>/application.yml"`
 ## Contributing
 Adding new modules is straight-forward. You can use the provided Maven Archetype (`com.gspatace:blizzard-rest-client-generator`) in order to generate new modules.
 In `<root>/client-apis`, run `mvn archetype:generate -DarchetypeGroupId=com.gspatace -DarchetypeArtifactId=blizzard-rest-client-generator`
@@ -73,6 +81,11 @@ In `<root>/client-apis`, run `mvn archetype:generate -DarchetypeGroupId=com.gspa
 ``` 
 This creates the `<artifactId>` module, and adds it to the main parent. The OpenAPI description of the target REST
 API has to be placed in `<root>\client-apis\<artifactId>\src\main\resources\<provided-input-spec-file>`. `mvn clean install` will now generate the artifact.
+
+For Swagger-UI integration, a new endpoint controller should be added in [tools/swagger-ui-integration](tools/swagger-ui-integration), 
+in `com.gspatace.blizzard.swagger.integration.apis` package. 
+See [Auction House API](tools/swagger-ui-integration/src/main/java/com/gspatace/blizzard/swagger/integration/apis/AuctionHouseApi.java)
+for reference.
 
 ## Available APIs
 As per Blizzard`s categories, found on their official [website](https://develop.battle.net/documentation/world-of-warcraft/game-data-apis), currently the following APIs are available:
