@@ -16,5 +16,8 @@ public class HttpSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) {
+        /**
+         * Override to disable Spring Basic Auth
+         */
     }
 }
