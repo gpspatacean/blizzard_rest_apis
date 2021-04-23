@@ -53,6 +53,7 @@ paths:
                 $ref: "#/components/schemas/auctionsApiResponse"
       security:
         - blizzard_auth: []
+        - access_token: []
 components:
   schemas:
     auctionsApiResponse:
