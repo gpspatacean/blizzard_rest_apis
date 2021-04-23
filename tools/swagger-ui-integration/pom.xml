@@ -50,13 +50,9 @@
     </dependency>
     <dependency>
       <groupId>com.gspatace</groupId>
-      <artifactId>blizzard-wow-creature-api</artifactId>
+      <artifactId>blizzard-clients-api-all</artifactId>
       <version>1.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>com.gspatace</groupId>
-      <artifactId>blizzard-auction-house-client</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <type>pom</type>
     </dependency>
     <dependency>
       <groupId>org.springframework.data</groupId>
