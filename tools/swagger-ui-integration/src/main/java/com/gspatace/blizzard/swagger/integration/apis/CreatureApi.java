@@ -13,11 +13,11 @@ public class CreatureApi extends AbstractApi implements DiscoverableResource {
 
     @Override
     public String getName() {
-        return "Creature";
+        return "WoW Creature";
     }
 
     @Override
-    @GetMapping("/creature")
+    @GetMapping("/wow-creature")
     public String getOpenApiSpec() {
         return getContent(SPECIFICATION_FILE);
     }

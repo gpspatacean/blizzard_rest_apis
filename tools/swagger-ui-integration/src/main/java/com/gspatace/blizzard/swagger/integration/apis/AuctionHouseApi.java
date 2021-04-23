@@ -12,13 +12,13 @@ public class AuctionHouseApi extends AbstractApi implements DiscoverableResource
     private static final String SPECIFICATION_FILE = "auction_house_openapi_spec.yaml";
 
     @Override
-    @GetMapping("/auction-house")
+    @GetMapping("/wow-auction-house")
     public String getOpenApiSpec() {
         return getContent(SPECIFICATION_FILE);
     }
 
     @Override
     public String getName() {
-        return "Auction House";
+        return "WoW Auction House";
     }
 }
