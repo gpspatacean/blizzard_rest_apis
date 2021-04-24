@@ -10,8 +10,8 @@ servers:
   - url: "https://eu.battle.net"
   - url: "https://eu.battle.net"
 tags:
-  - name: "Creature API"
-    description: "REST Client SDK to consume Blizzard`s Creature API endpoint(s)"
+  - name: "Blizzard Oauth2/Profile"
+    description: "REST Client SDK to consume Blizzard`s Oauth2/Profile API endpoint(s)"
 paths:
   /oauth/userinfo:
     get:
