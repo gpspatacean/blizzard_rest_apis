@@ -15,6 +15,11 @@
         <dependencies>
             <dependency>
                 <groupId>com.gspatace</groupId>
+                <artifactId>blizzard-oauth2</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.gspatace</groupId>
                 <artifactId>blizzard-wow-creature-api</artifactId>
                 <version>1.0-SNAPSHOT</version>
             </dependency>
@@ -27,6 +32,10 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>com.gspatace</groupId>
+            <artifactId>blizzard-oauth2</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.gspatace</groupId>
             <artifactId>blizzard-wow-creature-api</artifactId>

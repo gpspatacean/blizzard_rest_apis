@@ -1,0 +1,54 @@
+openapi: 3.0.0
+info:
+  title: "Blizzard Profile public API wrapper"
+  description: "Auto-generated SDK API wrapper on top of Blizzard Profile public APIs "
+  contact:
+    name: "George Spatacean"
+    email: "george.spatacean@gmail.com"
+  version: 0.0.1
+servers:
+  - url: "https://eu.battle.net"
+  - url: "https://eu.battle.net"
+tags:
+  - name: "Creature API"
+    description: "REST Client SDK to consume Blizzard`s Creature API endpoint(s)"
+paths:
+  /oauth/userinfo:
+    get:
+      tags:
+        - "user"
+      operationId: "getUserInfo"
+      responses:
+        200:
+          description: "Details of a valid user"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/userInfoResponse"
+      security:
+        - blizzard_auth: []
+        - access_token: []
+components:
+  schemas:
+    userInfoResponse:
+      type: "object"
+      properties:
+        sub:
+          type: "string"
+        id:
+          type: "integer"
+          format: "int64"
+        battletag:
+          type: "string"
+  securitySchemes:
+    blizzard_auth:
+      type: "oauth2"
+      flows:
+        authorizationCode:
+          authorizationUrl: "https://eu.battle.net/oauth/authorize"
+          tokenUrl: "https://eu.battle.net/oauth/token"
+          scopes: {}
+    access_token:
+      type: "apiKey"
+      in: "query"
+      name: "access_token"
