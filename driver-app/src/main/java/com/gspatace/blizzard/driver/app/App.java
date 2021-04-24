@@ -3,6 +3,7 @@ package com.gspatace.blizzard.driver.app;
 import com.gspatace.blizzard.auctionhouse.ApiClient;
 import com.gspatace.blizzard.auctionhouse.api.AuctionHouseApi;
 import com.gspatace.blizzard.auctionhouse.model.AuctionsApiResponse;
+import com.gspatace.blizzard.oauth2.api.UserApi; //NOSONAR
 import lombok.extern.slf4j.Slf4j;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -54,9 +55,16 @@ public class App implements CommandLineRunner {
             log.error("Exception occurred:", ex);
         }
 
-        String accessToken = oAuthRestTemplate().getAccessToken().getValue();
-        CreatureAPIDriver creatureAPIDriver = new CreatureAPIDriver();
+        final String accessToken = oAuthRestTemplate().getAccessToken().getValue();
+        final CreatureAPIDriver creatureAPIDriver = new CreatureAPIDriver();
         creatureAPIDriver.doTest(accessToken);
+
+        /**
+         * This API requires Authorization Code flow, keep it disabled
+         * and provide a manual token when desired
+         */
+        //final UserInfoAPIDriver userInfoAPIDriver = new UserInfoAPIDriver(); //NOSONAR
+        //userInfoAPIDriver.doTest("EUSRahKKtNEjM9lYhzdhAiR6lxqXltMv2m"); //NOSONAR
     }
 }
 
