@@ -8,7 +8,7 @@ info:
   version: 0.0.1
 servers:
   - url: "https://eu.battle.net"
-  - url: "https://eu.battle.net"
+  - url: "https://us.battle.net"
 tags:
   - name: "Blizzard Oauth2/Profile"
     description: "REST Client SDK to consume Blizzard`s Oauth2/Profile API endpoint(s)"
