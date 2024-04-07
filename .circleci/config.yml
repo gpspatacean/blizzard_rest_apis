@@ -3,7 +3,7 @@ jobs:
     build:
         working_directory: ~/runs
         docker:
-            - image: circleci/openjdk:8-jdk-stretch
+            - image: cimg/openjdk:17.0.6
         steps:
             - checkout
             - run: mvn install
@@ -11,7 +11,7 @@ jobs:
 
     sonar:
         docker:
-            - image: circleci/openjdk:11-jdk
+            - image: cimg/openjdk:17.0.6
         steps:
             - checkout
             - run:
