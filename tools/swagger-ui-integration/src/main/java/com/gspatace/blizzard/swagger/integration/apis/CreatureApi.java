@@ -17,7 +17,7 @@ public class CreatureApi extends AbstractApi implements DiscoverableResource {
     }
 
     @Override
-    @GetMapping("/wow-creature")
+    @GetMapping("/v3/api-docs/wow-creature")
     public String getOpenApiSpec() {
         return getContent(SPECIFICATION_FILE);
     }

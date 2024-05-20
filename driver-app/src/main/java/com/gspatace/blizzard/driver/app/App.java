@@ -1,11 +1,11 @@
 package com.gspatace.blizzard.driver.app;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gspatace.blizzard.auctionhouse.ApiClient;
 import com.gspatace.blizzard.auctionhouse.api.AuctionHouseApi;
 import com.gspatace.blizzard.auctionhouse.model.AuctionsApiResponse;
 import com.gspatace.blizzard.oauth2.api.UserApi; //NOSONAR
 import lombok.extern.slf4j.Slf4j;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -67,4 +67,3 @@ public class App implements CommandLineRunner {
         //userInfoAPIDriver.doTest("EUSRahKKtNEjM9lYhzdhAiR6lxqXltMv2m"); //NOSONAR
     }
 }
-

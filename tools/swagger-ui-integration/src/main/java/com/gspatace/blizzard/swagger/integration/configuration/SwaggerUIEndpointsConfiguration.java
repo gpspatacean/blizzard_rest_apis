@@ -2,34 +2,30 @@ package com.gspatace.blizzard.swagger.integration.configuration;
 
 import com.gspatace.blizzard.swagger.integration.model.ResourceData;
 import com.gspatace.blizzard.swagger.integration.services.ApiDiscoveryService;
+import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties;
+import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import springfox.documentation.swagger.web.SwaggerResource;
-import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Configuration
 public class SwaggerUIEndpointsConfiguration {
 
-    @Primary
     @Bean
-    public SwaggerResourcesProvider swaggerResourcesProvider() {
+    public Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> registerAPIs(final SwaggerUiConfigParameters swaggerUiConfigParameters) {
         final ApiDiscoveryService apiDiscoveryService = new ApiDiscoveryService();
-        final List<ResourceData> apis = apiDiscoveryService.getResources();
-        return () -> {
-            final List<SwaggerResource> resources = new ArrayList<>();
+        final List<ResourceData> resources = apiDiscoveryService.getResources();
 
-            apis.stream().forEach(res -> {
-                final SwaggerResource swaggerResource = new SwaggerResource();
-                swaggerResource.setName(res.getName());
-                swaggerResource.setLocation(res.getEndpoint());
-                resources.add(swaggerResource);
-            });
-
-            return resources;
-        };
+        final Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> registeredApis = resources.stream().map(resource -> {
+            final AbstractSwaggerUiConfigProperties.SwaggerUrl swaggerUrl = new AbstractSwaggerUiConfigProperties.SwaggerUrl();
+            swaggerUrl.setName(resource.getEndpoint().replace("/v3/api-docs/", ""));
+            swaggerUrl.setDisplayName(resource.getName());
+            return swaggerUrl;
+        }).collect(Collectors.toSet());
+        swaggerUiConfigParameters.setUrls(registeredApis);
+        return registeredApis;
     }
 }
