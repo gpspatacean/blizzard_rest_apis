@@ -16,7 +16,7 @@ public class Oauth2API extends AbstractApi implements DiscoverableResource {
     }
 
     @Override
-    @GetMapping("/blizzard-oauth2")
+    @GetMapping("/v3/api-docs/blizzard-oauth2")
     public String getOpenApiSpec() {
         return getContent(SPECIFICATION_FILE);
     }
