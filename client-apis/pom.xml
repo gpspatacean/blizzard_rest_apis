@@ -15,7 +15,7 @@
         <jodatime-version>2.7</jodatime-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.13.1</junit-version>
-        <spring-core.version>5.2.23.RELEASE</spring-core.version>
+        <spring-core.version>5.2.24.RELEASE</spring-core.version>
         <spring-context.version>5.2.5.RELEASE</spring-context.version>
         <spring-web.version>5.2.5.RELEASE</spring-web.version>
         <jsr305-version>3.0.2</jsr305-version>
