@@ -36,7 +36,7 @@
         <spring-boot-starter.version>3.2.5</spring-boot-starter.version>
         <spring-boot-starter-web.version>3.2.5</spring-boot-starter-web.version>
         <spring-data-commons.version>3.2.5</spring-data-commons.version>
-        <spring-core.version>6.1.7</spring-core.version>
+        <spring-core.version>5.2.24.RELEASE</spring-core.version>
         <spring-security-config.version>6.2.4</spring-security-config.version>
         <spring-security-web.version>6.2.4</spring-security-web.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
