@@ -9,7 +9,6 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
     <artifactId>blizzard-oauth2</artifactId>
-    <groupId>com.gspatace</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -18,7 +17,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>4.2.3</version>
+                <version>7.6.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -27,7 +26,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/blizzard_oauth2_openapi_spec.yaml</inputSpec>
                             <generatorName>java</generatorName>
-                            <library>resttemplate</library>
+                            <library>restclient</library>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                             </configOptions>

@@ -18,7 +18,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>4.2.3</version>
+                <version>7.6.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -27,7 +27,7 @@
                         <configuration>
                             <inputSpec>${project.basedir}/src/main/resources/wow_creature_api_openapi_spec.yaml</inputSpec>
                             <generatorName>java</generatorName>
-                            <library>resttemplate</library>
+                            <library>restclient</library>
                             <configOptions>
                                 <dateLibrary>java8</dateLibrary>
                             </configOptions>
