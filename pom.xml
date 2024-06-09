@@ -24,7 +24,6 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 
         <lombok.version>1.18.24</lombok.version>
-        <springfox-boot-starter.version>3.0.0</springfox-boot-starter.version>
         <reflections.version>0.9.11</reflections.version>
         <jackson-core.version>2.17.1</jackson-core.version>
         <jackson-databind.version>2.17.1</jackson-databind.version>
