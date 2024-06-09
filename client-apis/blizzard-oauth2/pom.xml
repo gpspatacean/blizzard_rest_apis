@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+  <modelVersion>4.0.0</modelVersion>
 
-    <parent>
+  <parent>
     <artifactId>blizzard-restsdk-clients</artifactId>
     <groupId>com.gspatace</groupId>
     <version>1.0-SNAPSHOT</version>
   </parent>
-    <artifactId>blizzard-oauth2</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+  <artifactId>blizzard-oauth2</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.6.0</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/blizzard_oauth2_openapi_spec.yaml</inputSpec>
-                            <generatorName>java</generatorName>
-                            <library>restclient</library>
-                            <configOptions>
-                                <dateLibrary>java8</dateLibrary>
-                            </configOptions>
-                            <invokerPackage>com.gspatace.blizzard.oauth2</invokerPackage>
-                            <apiPackage>com.gspatace.blizzard.oauth2.api</apiPackage>
-                            <modelPackage>com.gspatace.blizzard.oauth2.model</modelPackage>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>7.6.0</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/blizzard_oauth2_openapi_spec.yaml</inputSpec>
+              <generatorName>java</generatorName>
+              <library>restclient</library>
+              <configOptions>
+                <dateLibrary>java8</dateLibrary>
+              </configOptions>
+              <invokerPackage>com.gspatace.blizzard.oauth2</invokerPackage>
+              <apiPackage>com.gspatace.blizzard.oauth2.api</apiPackage>
+              <modelPackage>com.gspatace.blizzard.oauth2.model</modelPackage>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
