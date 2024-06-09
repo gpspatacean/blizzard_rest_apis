@@ -46,7 +46,7 @@ paths:
           example: "en_US"
       responses:
         200:
-          description: "List of the auctions on the specified realm"
+          description: "Details of the creature with the given ID"
           content:
             application/json:
               schema:
