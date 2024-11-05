@@ -1,44 +1,55 @@
 package com.gspatace.blizzard.swagger.integration.services;
 
-import com.gspatace.blizzard.swagger.integration.intf.DiscoverableResource;
-import com.gspatace.blizzard.swagger.integration.intf.SwaggerResource;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.gspatace.blizzard.swagger.integration.model.ResourceData;
+import com.gspatace.blizzard.swagger.integration.repository.OASpecifications;
 import lombok.extern.slf4j.Slf4j;
-import org.reflections.Reflections;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Slf4j
 public class ApiDiscoveryService {
+    private final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+
     public List<ResourceData> getResources() {
         final List<ResourceData> resourceDataList = new ArrayList<>();
-        final Reflections reflections = new Reflections("com.gspatace.blizzard.swagger.integration.apis");
-        final Set<Class<?>> apis = reflections.getTypesAnnotatedWith(SwaggerResource.class);
-        apis.forEach(clazz -> {
-            final Optional<ResourceData> resourceData = getResourceDataFromClazz(clazz);
-            resourceData.ifPresent(res -> {
-                resourceDataList.add(res);
-                log.info("Registered API {} at {} path.", res.getName(), res.getEndpoint());
-            });
-        });
+        for (final String specFile : getSpecificationFiles()) {
+            final String contents = OASpecifications.getInstance().getSpecification(specFile).orElse("");
+            try {
+                final String apiTitle = getApiTitle(contents);
+                final ResourceData resourceData = ResourceData.builder().name(apiTitle).endpoint(specFile).openApiSpec(contents).build();
+                resourceDataList.add(resourceData);
+                log.info("Registered API {} at {} path.", resourceData.getName(), resourceData.getEndpoint());
+            } catch (final JsonProcessingException e) {
+                log.error("Exception occurred while parsing specification file {}", specFile, e);
+            }
+        }
         return resourceDataList;
     }
 
-    private Optional<ResourceData> getResourceDataFromClazz(Class<?> clazz) {
+    private String getApiTitle(final String yamlContent) throws JsonProcessingException {
+        final var yamlMap = mapper.readValue(yamlContent, Map.class);
+        final var infoNode =  yamlMap.get("info");
+        return (String) ((Map<String, Object>)infoNode).get("title");
+    }
+
+    private List<String> getSpecificationFiles() {
+        final List<String> specFiles = new ArrayList<>();
         try {
-            final Constructor<?> constructor = clazz.getConstructor();
-            final DiscoverableResource api = (DiscoverableResource) constructor.newInstance();
-            final Method method = clazz.getMethod("getOpenApiSpec");
-            final GetMapping annotation = method.getAnnotation(GetMapping.class);
-            final String endpoint = Arrays.stream(annotation.value()).findFirst().orElse("");
-            return Optional.of(ResourceData.builder().name(api.getName()).endpoint(endpoint).openApiSpec(api.getOpenApiSpec()).build());
-        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException ex) {
-            log.error("Exception occurred while parsing Discovered Class {}", clazz.getName(), ex);
-            return Optional.empty();
+            final Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath*:**/*_openapi_spec.yaml");
+            for (final Resource resource : resources) {
+                specFiles.add(resource.getFilename());
+            }
+        } catch (final IOException e) {
+            log.error("Exception occurred while parsing specification files", e);
         }
+        return specFiles;
     }
 }
