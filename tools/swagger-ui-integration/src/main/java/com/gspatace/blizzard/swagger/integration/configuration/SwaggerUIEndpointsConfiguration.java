@@ -21,8 +21,8 @@ public class SwaggerUIEndpointsConfiguration {
 
         final Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> registeredApis = resources.stream().map(resource -> {
             final AbstractSwaggerUiConfigProperties.SwaggerUrl swaggerUrl = new AbstractSwaggerUiConfigProperties.SwaggerUrl();
-            swaggerUrl.setName(resource.getEndpoint().replace("/v3/api-docs/", ""));
-            swaggerUrl.setDisplayName(resource.getName());
+            swaggerUrl.setName(resource.endpoint());
+            swaggerUrl.setDisplayName(resource.name());
             return swaggerUrl;
         }).collect(Collectors.toSet());
         swaggerUiConfigParameters.setUrls(registeredApis);
