@@ -24,9 +24,9 @@ public class ApiDiscoveryService {
             final String contents = OASpecifications.getInstance().getSpecification(specFile).orElse("");
             try {
                 final String apiTitle = getApiTitle(contents);
-                final ResourceData resourceData = ResourceData.builder().name(apiTitle).endpoint(specFile).openApiSpec(contents).build();
+                final ResourceData resourceData = new ResourceData(apiTitle,specFile);
                 resourceDataList.add(resourceData);
-                log.info("Registered API {} at {} path.", resourceData.getName(), resourceData.getEndpoint());
+                log.info("Registered API {} at {} path.", resourceData.name(), resourceData.endpoint());
             } catch (final JsonProcessingException e) {
                 log.error("Exception occurred while parsing specification file {}", specFile, e);
             }
