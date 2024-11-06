@@ -33,6 +33,7 @@
         <spring-boot-maven-plugin.version>3.2.5</spring-boot-maven-plugin.version>
         <spring-boot-autoconfigre.version>3.2.5</spring-boot-autoconfigre.version>
         <spring-boot-starter.version>3.2.5</spring-boot-starter.version>
+        <spring-boot-starter-actuator.version>3.2.5</spring-boot-starter-actuator.version>
         <spring-boot-starter-web.version>3.2.5</spring-boot-starter-web.version>
         <spring-data-commons.version>3.2.5</spring-data-commons.version>
         <spring-core.version>6.1.7</spring-core.version>
@@ -69,6 +70,11 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
                 <version>${spring-boot-starter-web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${spring-boot-starter-actuator.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.data</groupId>
