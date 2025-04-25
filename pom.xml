@@ -39,7 +39,7 @@
         <spring-security-config.version>6.2.4</spring-security-config.version>
         <spring-security-web.version>6.2.7</spring-security-web.version>
         <spring-security-oauth2-autoconfigure.version>2.6.8</spring-security-oauth2-autoconfigure.version>
-        <spring-beans.version>6.1.7</spring-beans.version>
+        <spring-beans.version>6.1.14</spring-beans.version>
 
     </properties>
 
